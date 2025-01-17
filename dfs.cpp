@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -33,6 +36,47 @@ void iterative_dfs(int v) {
             }
         }
     }
+}
+
+vector<vector<int>> build_adj_list(const string& file_path, int& num_nodes){
+
+    ifstream file(file_path);
+
+    if (!file) {
+        cerr << "File path not found\n";
+    }
+
+    // Skip comment lines and parse metadata
+    string line;
+    while (getline(file, line)) {
+        if (line.empty() || line[0] == '#') {
+            if (line.find("Nodes:") != string::npos) {
+                istringstream iss(line);
+                string temp;
+                iss >> temp >> temp >> num_nodes; // Extract the number after "Nodes:"
+            }
+            continue;
+        }
+
+        break; // Stop skipping lines once we reach actual data
+    }
+
+    vector<vector<int>> adjacency_list(num_nodes);
+
+    do {
+        istringstream iss(line);
+        int from_node, to_node;
+        if (iss >> from_node >> to_node) {
+            // Add edge from 'from_node' to 'to_node'
+            adjacency_list[from_node].push_back(to_node);
+
+            // Add edge from 'to_node' to 'from_node' (since the graph is undirected)
+            adjacency_list[to_node].push_back(from_node);
+        }
+    } while (getline(file, line));
+
+    return adjacency_list;
+    
 }
 
 int main(){
