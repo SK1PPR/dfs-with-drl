@@ -140,7 +140,18 @@ class GraphEnvironment:
         self.update_target_network()
 
     def _build_model(self):
-        """Build the neural network model."""
+        """Build the neural network model with GPU support."""
+        # Ensure TensorFlow uses GPU if available
+        physical_devices = tf.config.list_physical_devices('GPU')
+        if physical_devices:
+            try:
+                tf.config.experimental.set_memory_growth(physical_devices[0], True)
+                print("Using GPU:", physical_devices[0])
+            except RuntimeError as e:
+                print("Error setting GPU memory growth:", e)
+        else:
+            print("No GPU found, using CPU.")
+
         input_layer = tf.keras.layers.Input(shape=(self.input_dim,))
         x1 = tf.keras.layers.Dense(128, activation='relu')(input_layer)
         x2 = tf.keras.layers.Dense(128, activation='relu')(x1)
@@ -157,8 +168,8 @@ class GraphEnvironment:
         model.compile(
             optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
             loss={
-                'policy': 'categorical_crossentropy',
-                'value': 'mse'
+            'policy': 'categorical_crossentropy',
+            'value': 'mse'
             }
         )
 
