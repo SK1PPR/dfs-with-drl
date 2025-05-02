@@ -1,0 +1,16 @@
+🔍 Benchmarking MinimaxAgent
+Trial 01: Visited 10/10 (100.00%), Time: 0.30s
+Trial 02: Visited 15/15 (100.00%), Time: 0.38s
+Trial 03: Visited 20/20 (100.00%), Time: 0.46s
+Trial 04: Visited 25/25 (100.00%), Time: 0.54s
+Trial 05: Visited 30/30 (100.00%), Time: 0.61s
+Trial 06: Visited 34/35 (97.14%), Time: 0.70s
+Trial 07: Visited 40/40 (100.00%), Time: 0.75s
+Trial 08: Visited 45/45 (100.00%), Time: 0.80s
+Trial 09: Visited 49/50 (98.00%), Time: 0.89s
+Trial 10: Visited 55/55 (100.00%), Time: 0.95s
+
+📊 Summary for MinimaxAgent
+✔ Success Rate     : 9/10
+📈 Avg. Coverage   : 99.51%
+⏱  Avg. Time/Trial : 0.64 seconds

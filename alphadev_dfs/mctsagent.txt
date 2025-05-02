@@ -1,0 +1,16 @@
+🔍 Benchmarking MCTSAgent
+Trial 01: Visited 10/10 (100.00%), Time: 0.41s
+Trial 02: Visited 15/15 (100.00%), Time: 0.56s
+Trial 03: Visited 20/20 (100.00%), Time: 0.78s
+Trial 04: Visited 25/25 (100.00%), Time: 1.05s
+Trial 05: Visited 30/30 (100.00%), Time: 1.38s
+Trial 06: Visited 35/35 (100.00%), Time: 1.62s
+Trial 07: Visited 40/40 (100.00%), Time: 1.85s
+Trial 08: Visited 45/45 (100.00%), Time: 2.10s
+Trial 09: Visited 50/50 (100.00%), Time: 2.30s
+Trial 10: Visited 55/55 (100.00%), Time: 2.55s
+
+📊 Summary for MCTSAgent
+✔ Success Rate     : 10/10
+📈 Avg. Coverage   : 100.00%
+⏱  Avg. Time/Trial : 1.68 seconds

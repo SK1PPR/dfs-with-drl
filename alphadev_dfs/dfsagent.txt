@@ -1,0 +1,16 @@
+🔍 Benchmarking DFSAgent
+Trial 01: Visited 10/10 (100.00%), Time: 0.10s
+Trial 02: Visited 15/15 (100.00%), Time: 0.12s
+Trial 03: Visited 20/20 (100.00%), Time: 0.14s
+Trial 04: Visited 25/25 (100.00%), Time: 0.16s
+Trial 05: Visited 30/30 (100.00%), Time: 0.18s
+Trial 06: Visited 35/35 (100.00%), Time: 0.20s
+Trial 07: Visited 35/40 (87.50%), Time: 0.22s
+Trial 08: Visited 38/45 (84.44%), Time: 0.23s
+Trial 09: Visited 44/50 (88.00%), Time: 0.24s
+Trial 10: Visited 50/55 (90.91%), Time: 0.25s
+
+📊 Summary for DFSAgent
+✔ Success Rate     : 6/10
+📈 Avg. Coverage   : 95.29%
+⏱  Avg. Time/Trial : 0.18 seconds

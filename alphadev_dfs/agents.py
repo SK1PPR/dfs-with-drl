@@ -1,4 +1,5 @@
 import random
+import time
 from dfs import GraphTraversalEnv, GraphTraversalSpec
 
 # --- RandomAgent ---
@@ -96,37 +97,56 @@ class MCTSAgent:
     
 # --- Benchmark Runner ---
 def benchmark_agent(agent_class, trials=5):
-    print(f"\nBenchmarking {agent_class.__name__}")
+    print(f"\n🔍 Benchmarking {agent_class.__name__}")
+    
+    total_coverage = 0.0
+    total_time = 0.0
     valid_traversals = 0
 
     for trial in range(trials):
         spec = GraphTraversalSpec(
-            max_traversal_steps=100,
-            num_nodes=10 + trial * 5,
-            edge_types=1,
-            adjacency_size=10 + trial * 5,
-            completion_reward=1.0,
-            correctness_weight=0.5,
-            efficiency_weight=0.5,
-            stochasticity_factor=0.1,
-            seed=trial + 100
+            100,                  # max_traversal_steps
+            10 + trial * 5,       # num_nodes
+            1,                    # edge_types
+            10 + trial * 5,       # adjacency_size
+            1.0,                  # completion_reward
+            0.5,                  # correctness_weight
+            0.5,                  # efficiency_weight
+            0.1,                  # stochasticity_factor
+            trial + 42            # seed
         )
+        
         env = GraphTraversalEnv(spec)
         agent = agent_class()
-
+        
         steps = 0
+        start_time = time.time()
         while steps < spec.max_traversal_steps and len(env.visited) < spec.num_nodes:
             action = agent.select_action(env)
             env.step(action)
             steps += 1
+        end_time = time.time()
 
-        if len(env.visited) == spec.num_nodes:
+        visited_nodes = len(env.visited)
+        coverage = (visited_nodes / spec.num_nodes) * 100
+        duration = end_time - start_time
+        total_coverage += coverage
+        total_time += duration
+
+        if visited_nodes == spec.num_nodes:
             valid_traversals += 1
 
-        print(f"Trial {trial + 1}: Visited {len(env.visited)} / {spec.num_nodes}")
+        print(f"Trial {trial+1:02}: Visited {visited_nodes}/{spec.num_nodes} "
+              f"({coverage:.2f}%), Time: {duration:.2f}s")
 
-    print(f"Success rate for {agent_class.__name__}: {valid_traversals}/{trials}")
-    
+    avg_coverage = total_coverage / trials
+    avg_time = total_time / trials
+
+    print(f"\n📊 Summary for {agent_class.__name__}")
+    print(f"✔ Success Rate     : {valid_traversals}/{trials}")
+    print(f"📈 Avg. Coverage   : {avg_coverage:.2f}%")
+    print(f"⏱  Avg. Time/Trial : {avg_time:.2f} seconds")
+
 
 
 # --- Run Benchmarks ---
