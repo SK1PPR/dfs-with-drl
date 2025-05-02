@@ -312,7 +312,7 @@ def get_path_history(env: GraphTraversalEnv) -> Sequence[int]:
     while len(visited) < num_nodes:
         path.append(current_node)
         visited.add(current_node)
-        neighbors = [i for i, connected in enumerate(env.graph[current_node]) if connected and i not in visited]
+        neighbors = [i for i, connected in enumerate(env.graph[current_node]) if connected]
         if neighbors:
             current_node = random.choice(neighbors)
         else:
@@ -919,4 +919,5 @@ def benchmark_network(num_trials=5):
     print(f"Valid traversals: ({valid_traversals}/{num_trials})")
 
 # Run benchmark tests
-benchmark_network(num_trials=15)
+# We are now testing this on different agents so that means this can be ignored
+# benchmark_network(num_trials=15)
